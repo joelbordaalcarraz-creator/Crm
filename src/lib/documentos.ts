@@ -13,7 +13,6 @@ export type MarcaDocumento = {
 };
 
 const LOGOS_POR_NEGOCIO: Record<string, string> = {
-  "las-flores": "/logos-doc/logo-las-flores.webp",
   umaru: "/logos-doc/logo-umaru.webp",
   mamina: "/logos-doc/logo-mamina.webp",
 };
@@ -22,12 +21,12 @@ export function marcaDocumento(negocioId: NegocioId): MarcaDocumento {
   if (negocioId === "todas") {
     // Mismo logo que el login/sidebar — es el logo "del grupo" en todo el
     // resto del sistema, así que un reporte consolidado usa el mismo.
-    return { nombre: "Consorcio Las Flores", logoUrl: "/logo.png", color: "#8c3a25" };
+    return { nombre: "CRM Corporativo", logoUrl: "", color: "#8c3a25" };
   }
   const negocio = NEGOCIOS_SEDES.find((n) => n.id === negocioId);
   return {
-    nombre: negocio?.nombre ?? "Consorcio Las Flores",
-    logoUrl: LOGOS_POR_NEGOCIO[negocioId] ?? "/logo.png",
+    nombre: negocio?.nombre ?? "CRM Corporativo",
+    logoUrl: LOGOS_POR_NEGOCIO[negocioId] ?? "",
     color: negocio?.colorAcento ?? "#8c3a25",
   };
 }

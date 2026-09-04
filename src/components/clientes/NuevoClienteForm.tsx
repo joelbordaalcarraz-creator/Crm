@@ -88,7 +88,7 @@ export function NuevoClienteForm({
 
 // --- Procedencia: Departamento → Provincia → Distrito -----------------------
 // Sin campo de país — el negocio solo atiende clientes de Perú (decisión de
-// Mijael, los pocos casos de otros países no ameritan el campo). El negocio
+// Los pocos casos de otros países no ameritan el campo. El negocio
 // es local de Huamanga, así que la cascada empieza ya resuelta en los
 // valores por defecto (Ayacucho / Huamanga) — quien registra no tiene que
 // tocar nada si el cliente es de acá. En cuanto alguien elige un valor

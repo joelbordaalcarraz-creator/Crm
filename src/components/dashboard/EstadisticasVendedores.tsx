@@ -99,7 +99,7 @@ export function EstadisticasVendedores({
   );
 
   // Cálculo de estadísticas por cada asesor — enfoque 100% CRM: captación de
-  // clientes, sin cifras de ventas en soles (ver decisión de Mijael al
+  // clientes, sin cifras de ventas en soles
   // eliminar Reservas/Delivery del sistema).
   const estadisticas: AsesorEstadistica[] = useMemo(() => {
     return equipoComercial

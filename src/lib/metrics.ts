@@ -316,13 +316,13 @@ export function serieClientesPorPeriodo(datos: DatosMetricas, negocioId: Negocio
 // --- Panel de Dirección: crecimiento del grupo, sin desglose por módulo ----
 // Los socios en Lima no necesitan ver el detalle operativo — necesitan saber
 // si el grupo está creciendo en clientes. Enfoque 100% CRM: sin ingresos
-// consolidados (decisión de Mijael al eliminar Reservas/Delivery).
+// consolidados.
 export interface ResumenCrecimientoGrupo {
   clientesTotales: number;
   clientesNuevos: number; clientesNuevosCambio: number | null;
   // "Volvió" se mide con la conversión de saludos de cumpleaños
   // (resumenCumpleanosMes) porque es la única señal de "visita" que existe
-  // en el sistema (Hospedaje, la otra que hubo, se eliminó — ver Mijael).
+  // en el sistema (Hospedaje, la otra que hubo, se eliminó).
   // Cubre solo a quienes cumplieron
   // proxy honesto, no "todas las visitas del grupo". El denominador es
   // `enviados` (saludos que de verdad salieron), no `totalDelMes` (todos

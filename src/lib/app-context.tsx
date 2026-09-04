@@ -4,7 +4,7 @@ import { createContext, useContext, useEffect, useState, ReactNode } from "react
 import { Negocio, NegocioId, Usuario, UsuarioNuevo, UsuarioPatch } from "./types";
 import { NEGOCIOS, NEGOCIO_TODAS, getNegocio } from "./mock/negocios";
 import { negociosPermitidos } from "./permissions";
-import { useData } from "./data-context";
+import { guardarUsuariosLocales, leerUsuariosLocales, UsuarioLocal } from "./usuarios-locales";
 
 interface AppContextValue {
   usuario: Usuario | null;
@@ -22,81 +22,62 @@ interface AppContextValue {
 }
 
 const AppContext = createContext<AppContextValue | null>(null);
-
-// Ya no se guarda el id del usuario activo en localStorage — cualquiera
-// podía abrir F12 → Application → Local Storage y escribirle el id de otra
-// cuenta a mano para "entrar" como esa persona, sin saber su contraseña.
-// La sesión de verdad vive en una cookie HttpOnly que pone el servidor (ver
-// src/app/api/auth) — el JavaScript del navegador no puede leerla ni
-// tocarla, solo el propio navegador la manda de vuelta en cada pedido.
+const STORAGE_USUARIO = "crm-usuario-id-activo";
 const STORAGE_NEGOCIO = "crm-negocio-activo";
 
 export function AppProvider({ children }: { children: ReactNode }) {
-  // Las 3 sedes (nombre, color, si opera) son config del sistema, casi fija
-  // — no el tipo de dato ficticio/generado que se migró a Supabase (eso son
-  // clientes, campañas, festividades, seguimiento, usuarios). Se quedan acá.
   const negocios: Negocio[] = NEGOCIOS;
-  const {
-    usuarios, listo: listoDatos,
-    crearUsuario: dbCrear, actualizarUsuario: dbActualizar, eliminarUsuario: dbEliminar,
-  } = useData();
+  const [usuarios, setUsuarios] = useState<UsuarioLocal[]>([]);
   const [usuarioId, setUsuarioId] = useState<string | null>(null);
   const [negocioId, setNegocioId] = useState<NegocioId>("las-flores");
-  const [listoSesion, setListoSesion] = useState(false);
-
+  const [listo, setListo] = useState(false);
   const usuario = usuarioId ? usuarios.find((u) => u.id === usuarioId) ?? null : null;
 
   /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
     const negocioGuardado = window.localStorage.getItem(STORAGE_NEGOCIO) as NegocioId | null;
+    const usuarioGuardado = window.localStorage.getItem(STORAGE_USUARIO);
+    setUsuarios(leerUsuariosLocales());
     if (negocioGuardado) setNegocioId(negocioGuardado);
-    // La única fuente de verdad de "quién es" es la cookie de sesión, que
-    // solo el servidor puede leer/verificar (ver src/app/api/auth/sesion) —
-    // acá simplemente se le pregunta si hay una sesión válida.
-    fetch("/api/auth/sesion")
-      .then((res) => (res.ok ? res.json() : null))
-      .then((encontrado: Usuario | null) => {
-        if (encontrado) setUsuarioId(encontrado.id);
-        setListoSesion(true);
-      })
-      .catch(() => setListoSesion(true));
+    if (usuarioGuardado) setUsuarioId(usuarioGuardado);
+    setListo(true);
   }, []);
   /* eslint-enable react-hooks/set-state-in-effect */
 
   async function iniciarSesion(loginUsuario: string, contrasena: string): Promise<boolean> {
-    const res = await fetch("/api/auth/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ usuario: loginUsuario, contrasena }),
-    });
-    if (!res.ok) return false;
-    const encontrado: Usuario = await res.json();
+    const encontrado = usuarios.find((u) =>
+      u.usuario.toLowerCase() === loginUsuario.trim().toLowerCase() && u.contrasena === contrasena
+    );
+    if (!encontrado) return false;
     setUsuarioId(encontrado.id);
     const alcance = negociosPermitidos(encontrado.rolTipo, encontrado.negocioId);
     const negocioInicial = alcance === "todos" ? encontrado.negocioId : alcance[0];
     setNegocioId(negocioInicial);
+    window.localStorage.setItem(STORAGE_USUARIO, encontrado.id);
     window.localStorage.setItem(STORAGE_NEGOCIO, negocioInicial);
     return true;
   }
 
-  // Ya no hace falta el truco de "semilla vs override" — cada cuenta es una
-  // fila de verdad en Supabase, editar (aunque sea una de las 5 originales)
-  // es un UPDATE normal.
+  const guardar = (siguientes: UsuarioLocal[]) => {
+    setUsuarios(siguientes);
+    guardarUsuariosLocales(siguientes);
+  };
+
   const editarUsuario = (id: string, patch: UsuarioPatch) => {
-    void dbActualizar(id, patch);
+    guardar(usuarios.map((u) => u.id === id ? { ...u, ...patch } : u));
   };
 
   const eliminarUsuario = (id: string) => {
-    void dbEliminar(id);
+    guardar(usuarios.filter((u) => u.id !== id));
   };
 
-  const crearUsuarioFn = (u: UsuarioNuevo) => {
-    void dbCrear(u);
+  const crearUsuario = (u: UsuarioNuevo) => {
+    guardar([...usuarios, { ...u, id: `local-${Date.now()}` }]);
   };
 
   const cerrarSesion = () => {
     setUsuarioId(null);
-    void fetch("/api/auth/logout", { method: "POST" });
+    window.localStorage.removeItem(STORAGE_USUARIO);
   };
 
   const cambiarNegocio = (id: NegocioId) => {
@@ -114,24 +95,24 @@ export function AppProvider({ children }: { children: ReactNode }) {
       })()
     : [NEGOCIO_TODAS, ...negocios];
 
-  const negocioActivo = getNegocio(negocioId) ?? negocios[0];
-
-  const value: AppContextValue = {
-    usuario,
-    negocio: negocioActivo,
-    negocios,
-    negociosDisponibles,
-    usuarios,
-    listo: listoSesion && listoDatos,
-    iniciarSesion,
-    cerrarSesion,
-    cambiarNegocio,
-    crearUsuario: crearUsuarioFn,
-    editarUsuario,
-    eliminarUsuario,
-  };
-
-  return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
+  return (
+    <AppContext.Provider value={{
+      usuario,
+      negocio: getNegocio(negocioId) ?? negocios[0],
+      negocios,
+      negociosDisponibles,
+      usuarios,
+      listo,
+      iniciarSesion,
+      cerrarSesion,
+      cambiarNegocio,
+      crearUsuario,
+      editarUsuario,
+      eliminarUsuario,
+    }}>
+      {children}
+    </AppContext.Provider>
+  );
 }
 
 export function useApp(): AppContextValue {

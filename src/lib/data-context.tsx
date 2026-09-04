@@ -31,7 +31,7 @@ import {
   dbGuardarConfigSaludo, dbAprobarMes,
   suscribirCambios, type CambioRealtime,
   mapUsuario, mapClienteIndividual, mapClienteCorporativo, mapCampana, mapFestividad, mapSeguimiento,
-} from "./db";
+} from "./db-local";
 
 // Aplica un evento de Supabase Realtime al estado local — el mecanismo que
 // hace que un cambio hecho en una pestaña/sesión (ej. Ventas Uno registra un
@@ -172,6 +172,11 @@ export function DataProvider({ children }: { children: ReactNode }) {
       .catch((e: Error) => { if (!cancelado) { setError(e.message); setListo(true); } });
     return () => { cancelado = true; };
   }, [intento]);
+
+  useEffect(() => {
+    if (!listo || typeof window === "undefined") return;
+    window.localStorage.setItem("crm-datos-locales", JSON.stringify(datos));
+  }, [datos, listo]);
 
   const recargar = useCallback(() => setIntento((n) => n + 1), []);
 

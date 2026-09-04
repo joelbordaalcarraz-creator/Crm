@@ -27,7 +27,7 @@ export default function ConfiguracionPage() {
   if (nivel === "no") {
     return (
       <>
-        <Topbar titulo="Configuración" descripcion="Grupo Las Flores" />
+        <Topbar titulo="Configuración" descripcion="CRM Corporativo" />
         <main className="flex-1 p-8">
           <Card>
             <EmptyState

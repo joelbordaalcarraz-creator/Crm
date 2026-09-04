@@ -10,8 +10,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "CRM Consorcio Las Flores",
-  description: "Prototipo de CRM para Restaurante Las Flores, Hotel Umaru y Mamina Restobar",
+  title: "CRM Corporativo",
+  description: "Sistema corporativo de gestión de clientes",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

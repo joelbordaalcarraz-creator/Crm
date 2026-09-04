@@ -38,7 +38,7 @@ export const RAZONES_SOCIALES = [
 
 // Procedencia del cliente — cascada Departamento → Provincia → Distrito (ver
 // NuevoClienteForm). Sin nivel de país: el negocio solo atiende clientes de
-// Perú (decisión de Mijael). Listas cortas a propósito: el negocio es local
+// Perú. Listas cortas a propósito: el negocio es local
 // de Huamanga, así que casi todos los clientes caen en los valores por
 // defecto (Ayacucho / Huamanga); estas son solo las opciones más comunes
 // fuera de eso — cualquier otra se escribe a mano con "Otro".

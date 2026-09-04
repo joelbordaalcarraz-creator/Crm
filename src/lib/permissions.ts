@@ -1,9 +1,9 @@
-// Matriz de permisos del CRM — modelo definido por Mijael junto a Arturo y
+// Matriz de permisos del CRM — modelo definido por el equipo junto a Arturo y
 // Luis (reunión de diseño de su propio CRM), reemplaza el modelo anterior:
 //
 // - Dirección (socios/directorio en Lima): un solo panel de métricas de
 //   crecimiento del grupo. Cero acciones, cero acceso a módulos operativos.
-// - Gerencial (Mijael): control operativo total de los 3 negocios — hace todo
+// - Gerencial: control operativo total de los 3 negocios — hace todo
 //   lo que hace Ventas, además gestiona campañas, usuarios (crear/editar/
 //   eliminar cuentas de Ventas) y días festivos. El detalle y comparativo de
 //   actividad de su equipo lo ve en Panel Principal (Rendimiento del Equipo

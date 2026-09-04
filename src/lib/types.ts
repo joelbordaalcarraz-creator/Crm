@@ -1,5 +1,5 @@
 // Tipos centrales del CRM — reflejan los campos reales del Excel de clientes
-// (Meliza, Ventas) y los módulos definidos en el Plan de CRM del Grupo Las Flores.
+// (Meliza, Ventas) y los módulos definidos en el Plan de CRM.
 
 export type NegocioId = "las-flores" | "umaru" | "mamina" | "todas";
 
@@ -12,10 +12,10 @@ export interface Negocio {
   descripcionEstado: string;
 }
 
-// Los tres perfiles de permisos. Cualquier cuenta nueva que cree Mijael se
+// Los tres perfiles de permisos. Cualquier cuenta nueva que cree Gerencia se
 // asigna a uno de estos perfiles y hereda automáticamente sus permisos.
 // - direccion: socios/directorio en Lima — solo un panel de métricas, cero acciones.
-// - gerencial: Mijael — control operativo total de los 3 negocios.
+// - gerencial: control operativo total de los 3 negocios.
 // - ventas: el equipo de cada negocio (registra clientes, cumpleaños).
 export type RolTipo = "direccion" | "gerencial" | "ventas" | "administracion";
 
@@ -35,7 +35,7 @@ export interface Usuario {
   iniciales: string;
   usuario: string; // usuario de acceso
   negocioId: NegocioId; // negocio al que pertenece la cuenta (Dirección no tiene uno fijo, ve los tres)
-  creadoPor?: string; // id de quién creó la cuenta (siempre Mijael/Gerencial, para cuentas nuevas)
+  creadoPor?: string; // id de quién creó la cuenta (Gerencia, para cuentas nuevas)
 }
 
 // Payload para crear una cuenta — la contraseña va en texto plano acá
@@ -66,7 +66,7 @@ export interface ClienteIndividual {
   // Ayacucho) no se pide más detalle, así que estos quedan en "" cuando no
   // aplican (nunca undefined, para no romper el texto donde se muestran).
   // Sin campo de país — el negocio solo atiende clientes de Perú, decisión
-  // de Mijael (los pocos casos de otros países no ameritan el campo).
+  // del sistema (los pocos casos de otros países no ameritan el campo).
   departamento: string;
   provincia: string;
   distrito: string;

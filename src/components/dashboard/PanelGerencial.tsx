@@ -32,7 +32,7 @@ function origenLabel(origen: string): string {
   return ORIGEN_LABEL[origen] ?? origen;
 }
 
-// Panel Gerencial: los mismos 4 pilares que pidió Mijael — Crecimiento,
+// Panel Gerencial: los mismos 4 pilares del sistema — Crecimiento,
 // Fidelización, Rendimiento del equipo, y de dónde vienen más registros —
 // pero con el detalle operativo por negocio que Dirección no necesita
 // (vendedores, ranking, seguimiento en vivo). Regla explícita: un negocio
@@ -306,7 +306,7 @@ export function PanelGerencial() {
 
       {/* ================= RENDIMIENTO DEL EQUIPO ================= */}
       {/* El título de acá arriba describe la tarjeta "Último Registro" que
-          sigue inmediatamente abajo (para qué le sirve a Mijael: ver qué
+          sigue inmediatamente abajo (para facilitar la lectura de qué
           cliente se registró más reciente y qué asesor lo atendió) — no
           "Rendimiento del equipo", que ya es el título propio de
           EstadisticasVendedores más abajo y quedaba redundante. */}

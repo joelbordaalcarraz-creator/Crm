@@ -31,7 +31,7 @@ export default function UsuariosPage() {
   if (nivel === "no") {
     return (
       <>
-        <Topbar titulo="Usuarios" descripcion="Grupo Las Flores" />
+        <Topbar titulo="Usuarios" descripcion="CRM Corporativo" />
         <main className="flex-1 p-8">
           <Card>
             <EmptyState
@@ -82,7 +82,7 @@ function UsuariosContenido({
 
   return (
     <>
-      <Topbar titulo="Usuarios" descripcion="Grupo Las Flores · crear, editar y eliminar cuentas de Ventas" />
+      <Topbar titulo="Usuarios" descripcion="Crear, editar y eliminar cuentas de Ventas" />
       <main className="flex-1 p-8 animate-fade-in space-y-6">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-5">
           <Card padding="p-0 pt-5">

@@ -154,7 +154,7 @@ export function useEstrategiasChat(negocioId: string) {
 
 // Clave propia de Gemini, opcional — solo se guarda en este navegador. Si
 // está vacía, /api/estrategias usa la clave del sistema (GEMINI_API_KEY en
-// el servidor); si Mijael (o quien sea) pega la suya acá, esa se usa en su
+// el servidor); si alguien pega la suya acá, esa se usa en su
 // lugar para ESTE navegador — útil si en algún momento quiere su propia
 // cuota/facturación de Gemini, sin depender de la clave que configuró
 // Sistemas.

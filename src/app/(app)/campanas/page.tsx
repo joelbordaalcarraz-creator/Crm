@@ -120,7 +120,7 @@ function CampanasInner() {
   //
   // El envío masivo real (automático, sin abrir WhatsApp uno por uno) solo
   // existe con la API de WhatsApp Business — pagada, no conectada todavía
-  // (ver decisión de Mijael). Mientras tanto, "Aprobar y enviar" SIMULA que
+  // Mientras tanto, "Aprobar y enviar" SIMULA que
   // ya se mandó a todo el segmento (marca el 100% como contactado al
   // instante) — igual que el resto del sistema, no se oculta que es
   // simulado: se avisa en el texto de la tarjeta. El botón de WhatsApp por

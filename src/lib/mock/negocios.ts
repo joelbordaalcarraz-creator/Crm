@@ -6,10 +6,10 @@ export const NEGOCIO_TODAS: Negocio = {
   tipo: "restaurante",
   operando: true,
   colorAcento: "#8c3a25",
-  descripcionEstado: "Grupo Las Flores · Vista consolidada de todas las sedes",
+  descripcionEstado: "Vista consolidada de todas las sedes",
 };
 
-// Colores oficiales por negocio (decisión de Mijael) — colorAcento es la
+// Colores oficiales por negocio — colorAcento es la
 // única fuente de este color en todo el sistema (badges, punto de color
 // junto al nombre, gráficos comparativos, selector de sede en el Topbar,
 // etc.) — cambiarlo acá los actualiza en todos esos lugares a la vez.
