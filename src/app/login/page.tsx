@@ -1,9 +1,10 @@
 "use client";
 
 import { useState, useRef } from "react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useApp } from "@/lib/app-context";
-import { Eye, EyeOff, ChevronDown, ArrowRight, Building2 } from "lucide-react";
+import { Eye, EyeOff, ChevronDown, ArrowRight } from "lucide-react";
 
 // Orden fijo de la lista del login — la jerarquía del organigrama, no
 // alfabético ni "más reciente primero" (ese es el orden que usan las
@@ -63,10 +64,10 @@ export default function LoginPage() {
         {/* Cabecera */}
         <div className="text-center mb-6">
           <div className="w-16 h-16 mx-auto mb-3 rounded-full bg-[var(--color-crema)]/60 border border-[var(--color-gris-claro)]/40 flex items-center justify-center shadow-inner overflow-hidden">
-            <Building2 size={30} className="text-[var(--color-terracota)]" />
+            <Image src="/recreo.png" alt="El Recreo" width={64} height={64} className="h-full w-full object-cover" priority />
           </div>
           <h1 className="text-2xl font-bold text-[var(--color-terracota)] tracking-tight" style={{ fontFamily: "Georgia, 'Times New Roman', serif" }}>
-            CRM Corporativo
+            CRM El Recreo
           </h1>
           <p className="text-xs text-[var(--color-gris-medio)] mt-1 font-medium">
             Restaurante · Hotel · Restobar
@@ -141,7 +142,7 @@ export default function LoginPage() {
         </form>
 
         <p className="text-center text-[11px] text-[var(--color-gris-medio)] mt-6">
-          CRM Corporativo © 2026
+          CRM El Recreo © 2026
         </p>
       </div>
     </div>

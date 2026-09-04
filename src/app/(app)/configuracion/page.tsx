@@ -27,7 +27,7 @@ export default function ConfiguracionPage() {
   if (nivel === "no") {
     return (
       <>
-        <Topbar titulo="Configuración" descripcion="CRM Corporativo" />
+        <Topbar titulo="Configuración" descripcion="CRM El Recreo" />
         <main className="flex-1 p-8">
           <Card>
             <EmptyState

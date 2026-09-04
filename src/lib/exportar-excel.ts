@@ -23,7 +23,7 @@ export async function exportarExcel(opts: {
   const colorHexARGB = "FF" + [r, g, b].map((n) => n.toString(16).padStart(2, "0")).join("").toUpperCase();
 
   const workbook = new ExcelJS.Workbook();
-  workbook.creator = "CRM Corporativo";
+  workbook.creator = "CRM El Recreo";
   workbook.created = new Date();
   const ws = workbook.addWorksheet(hoja.slice(0, 31), { views: [{ state: "frozen", ySplit: 5 }] });
 

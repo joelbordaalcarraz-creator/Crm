@@ -107,7 +107,7 @@ export async function exportarDashboardPDF(opts: {
     doc.setFont("helvetica", "normal");
     doc.setFontSize(8);
     doc.setTextColor(150, 142, 132);
-    doc.text(`CRM Corporativo · Generado el ${fechaDocumento()} por ${generadoPor}`, MM_MARGEN, y);
+    doc.text(`CRM El Recreo · Generado el ${fechaDocumento()} por ${generadoPor}`, MM_MARGEN, y);
     doc.text(`Página ${numero} de ${total}`, anchoPagina - MM_MARGEN, y, { align: "right" });
   }
 

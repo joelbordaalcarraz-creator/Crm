@@ -27,7 +27,7 @@ export function Sidebar() {
       <div className="flex items-center gap-3 px-5 h-20 border-b border-[var(--color-sidebar-border)]">
         <Building2 size={28} className="w-9 h-9 shrink-0 p-1 text-white" />
         <div>
-          <p className="font-semibold text-sm leading-tight">CRM Corporativo</p>
+          <p className="font-semibold text-sm leading-tight">CRM El Recreo</p>
           <p className="text-[11px] text-white/50">Prototipo interno</p>
         </div>
       </div>

@@ -31,7 +31,7 @@ export default function UsuariosPage() {
   if (nivel === "no") {
     return (
       <>
-        <Topbar titulo="Usuarios" descripcion="CRM Corporativo" />
+        <Topbar titulo="Usuarios" descripcion="CRM El Recreo" />
         <main className="flex-1 p-8">
           <Card>
             <EmptyState

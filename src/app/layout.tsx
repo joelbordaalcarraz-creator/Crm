@@ -10,8 +10,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "CRM Corporativo",
-  description: "Sistema corporativo de gestión de clientes",
+  title: "CRM El Recreo",
+  description: "Sistema de gestión de clientes de El Recreo",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

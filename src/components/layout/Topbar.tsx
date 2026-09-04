@@ -52,7 +52,7 @@ export function Topbar({ titulo, descripcion, accion }: { titulo: string; descri
             {esConsolidado ? (
               <>
                 <Building2 size={14} className="text-[var(--color-terracota)]" />
-                CRM Corporativo
+                CRM El Recreo
               </>
             ) : (
               <>
